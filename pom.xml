@@ -18,6 +18,9 @@
     <module>domain</module>
     <module>domain.impl</module>
     <module>api</module>
+    <module>dal</module>
+    <module>dal.h2-impl</module>
+    <module>dal.postgres-impl</module>
   </modules>
 
   <dependencyManagement>
@@ -28,6 +31,11 @@
         <version>${spring-boot.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.modelmapper</groupId>
+        <artifactId>modelmapper</artifactId>
+        <version>2.3.2</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
