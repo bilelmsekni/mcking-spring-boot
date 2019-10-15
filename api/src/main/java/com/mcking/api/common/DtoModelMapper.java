@@ -1,9 +1,8 @@
 package com.mcking.api.common;
 
-import com.mcking.api.models.BurgerDto;
-import com.mcking.api.models.BurgerDto.CreationRequest;
-import com.mcking.api.models.BurgerDto.UpdateRequest;
-import com.mcking.domain.models.Burger;
+import com.mcking.api.models.Burger;
+import com.mcking.api.models.Burger.CreationRequest;
+import com.mcking.api.models.Burger.UpdateRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
@@ -18,21 +17,24 @@ public class DtoModelMapper {
         this.modelMapper = modelMapper;
     }
 
-    public List<BurgerDto> mapMany(List<Burger> burgers, Class<BurgerDto> burgerDtoClass) {
+    public List<Burger> mapMany(
+            List<com.mcking.domain.models.burger.Burger> burgers, Class<Burger> burgerDtoClass) {
         return burgers.stream()
                 .map(source -> modelMapper.map(source, burgerDtoClass))
                 .collect(Collectors.toList());
     }
 
-    public BurgerDto map(Burger burger, Class<BurgerDto> burgerDtoClass) {
-        return modelMapper.map(burger, burgerDtoClass);
+    public Burger map(com.mcking.domain.models.burger.Burger burger, Class<Burger> burgerClass) {
+        return modelMapper.map(burger, burgerClass);
     }
 
-    public Burger map(CreationRequest request, Class<Burger> burgerClass) {
+    public com.mcking.domain.models.burger.Burger map(
+            CreationRequest request, Class<com.mcking.domain.models.burger.Burger> burgerClass) {
         return modelMapper.map(request, burgerClass);
     }
 
-    public Burger map(UpdateRequest request, Class<Burger> burgerClass) {
+    public com.mcking.domain.models.burger.Burger map(
+            UpdateRequest request, Class<com.mcking.domain.models.burger.Burger> burgerClass) {
         return modelMapper.map(request, burgerClass);
     }
 }

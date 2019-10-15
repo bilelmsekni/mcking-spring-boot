@@ -2,6 +2,7 @@ package com.mcking.api;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.mcking.domain.impl.DomainImplConfiguration;
+import com.mcking.fakedb.FakedbConfiguration;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,7 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
-@Import(DomainImplConfiguration.class)
+@Import({DomainImplConfiguration.class, FakedbConfiguration.class})
 public class McKingApi {
     public static void main(String[] args) {
         SpringApplication.run(McKingApi.class, args);

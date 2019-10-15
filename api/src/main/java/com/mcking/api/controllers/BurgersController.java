@@ -1,9 +1,8 @@
 package com.mcking.api.controllers;
 
 import com.mcking.api.common.DtoModelMapper;
-import com.mcking.api.models.BurgerDto;
-import com.mcking.domain.models.Burger;
-import com.mcking.domain.services.BurgersService;
+import com.mcking.api.models.Burger;
+import com.mcking.services.burgers.BurgersService;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
@@ -33,30 +32,34 @@ public class BurgersController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    List<BurgerDto> fetchBurgers() {
-        List<Burger> burgers = this.burgerService.getBurgers();
-        return dtoModelMapper.mapMany(burgers, BurgerDto.class);
+    List<Burger> fetchBurgers() {
+        List<com.mcking.domain.models.burger.Burger> burgers = this.burgerService.getBurgers();
+        return dtoModelMapper.mapMany(burgers, Burger.class);
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    ResponseEntity<BurgerDto> fetchBurger(@PathVariable int id) {
-        return Optional.ofNullable(dtoModelMapper.map(burgerService.getBurger(id), BurgerDto.class))
+    ResponseEntity<Burger> fetchBurger(@PathVariable int id) {
+        return Optional.ofNullable(dtoModelMapper.map(burgerService.getBurger(id), Burger.class))
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    Burger createBurger(@RequestBody @Valid BurgerDto.CreationRequest request) {
-        Burger burger = dtoModelMapper.map(request, Burger.class);
+    com.mcking.domain.models.burger.Burger createBurger(
+            @RequestBody @Valid Burger.CreationRequest request) {
+        com.mcking.domain.models.burger.Burger burger =
+                dtoModelMapper.map(request, com.mcking.domain.models.burger.Burger.class);
         return burgerService.createBurger(burger);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    Burger updateBurger(@PathVariable int id, @RequestBody @Valid BurgerDto.UpdateRequest request) {
-        Burger burger = dtoModelMapper.map(request, Burger.class);
+    com.mcking.domain.models.burger.Burger updateBurger(
+            @PathVariable int id, @RequestBody @Valid Burger.UpdateRequest request) {
+        com.mcking.domain.models.burger.Burger burger =
+                dtoModelMapper.map(request, com.mcking.domain.models.burger.Burger.class);
         return burgerService.updateBurger(id, burger);
     }
 

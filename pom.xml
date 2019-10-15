@@ -15,12 +15,13 @@
     <java.version>11</java.version>
   </properties>
   <modules>
-    <module>domain</module>
-    <module>domain.impl</module>
     <module>api</module>
-    <module>dal</module>
-    <module>dal.h2-impl</module>
-    <module>dal.postgres-impl</module>
+    <module>domain.impl</module>
+    <module>domain.models</module>
+    <module>domain.repositories</module>
+    <module>domain.services</module>
+    <module>fakedb.repositories</module>
+    <module>cli</module>
   </modules>
 
   <dependencyManagement>
